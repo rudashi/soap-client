@@ -1,0 +1,31 @@
+{
+    "name": "rudashi/soap-client",
+    "description": "A fluent SOAP client for PHP",
+    "version": "1.0.0",
+    "require": {
+        "php": "^8.2",
+        "ext-soap": "*"
+    },
+    "minimum-stability": "stable",
+    "require-dev": {
+        "pestphp/pest": "^3.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Rudashi\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\": "tests/"
+        }
+    },
+    "scripts": {
+        "test": "pest"
+    },
+    "config": {
+        "optimize-autoloader": true,
+        "sort-packages": true,
+        "allow-plugins": true
+    }
+}

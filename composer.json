@@ -8,6 +8,7 @@
     },
     "minimum-stability": "stable",
     "require-dev": {
+        "friendsofphp/php-cs-fixer": "^3.64",
         "pestphp/pest": "^3.0"
     },
     "autoload": {
@@ -21,7 +22,12 @@
         }
     },
     "scripts": {
-        "test": "pest"
+        "test:unit": "pest --testsuite=unit",
+        "test:pint": "php-cs-fixer check src --allow-risky=yes -vvv",
+        "test": [
+            "@test:pint",
+            "@test:unit"
+        ]
     },
     "config": {
         "optimize-autoloader": true,

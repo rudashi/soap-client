@@ -1,0 +1,16 @@
+services:
+  soap-client:
+    build:
+      context: .
+      dockerfile: ./.docker/Dockerfile
+    container_name: soap-client
+    volumes:
+      - .:/var/www
+    ports:
+      - "8080:80"
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge

@@ -23,10 +23,13 @@
     },
     "scripts": {
         "test:unit": "pest --testsuite=unit",
-        "test:pint": "php-cs-fixer check src --allow-risky=yes -vvv",
+        "test:mutate": "pest --mutate",
+        "test:coverage": "pest --coverage",
+        "test:pint": "php-cs-fixer check --allow-risky=yes -vvv",
         "test": [
             "@test:pint",
-            "@test:unit"
+            "@test:unit",
+            "@test:mutate"
         ]
     },
     "config": {

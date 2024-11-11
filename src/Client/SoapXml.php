@@ -4,6 +4,8 @@ declare(strict_types=1);
 
 namespace Rudashi\Client;
 
+use RuntimeException;
+
 final readonly class SoapXml
 {
     private SoapVersion $version;
@@ -19,12 +21,10 @@ final readonly class SoapXml
         $xml = new self($string);
         $prefix = $xml->version->findPrefix($string);
 
-        $response = '';
-
         if (preg_match('/<' . $prefix . ':Envelope[\s>].*?<\/' . $prefix . ':Envelope>/s', $xml->output, $matches)) {
-            $response = $matches[0];
+            return $matches[0];
         }
 
-        return $response;
+        throw new RuntimeException('Missing mandatory "Envelope" element.');
     }
 }

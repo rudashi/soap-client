@@ -157,34 +157,34 @@ SOAPAction: "Some-URI"
 </SOAP-ENV:Envelope>');
 });
 
-it('throw exception on unknown xml structure', function () {
-    $response = '
-<?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns:soap="http://www.w3.org/2001/12/soap-envelope">
-  <soap:Body>
-  </soap:Body>
-</soap:Envelope>
-';
+describe('throw exceptions', function (): void {
+    it('throw exception on unknown xml structure', function () {
+        $response = '<soap:Envelope xmlns:soap="http://www.w3.org/2001/12/soap-envelope"></soap:Envelope>';
 
-    expect(fn () => SoapXml::parse($response))
-        ->toThrow(
-            exception: ValueError::class,
-            exceptionMessage: 'Unknown SOAP XML type.',
-        );
-});
+        expect(fn () => SoapXml::parse($response))
+            ->toThrow(
+                exception: ValueError::class,
+                exceptionMessage: 'Unknown SOAP XML type.',
+            );
+    });
 
-it('throw exception when missing namespace', function () {
-    $response = '
-<?xml version="1.0" encoding="utf-8"?>
-<soap:Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/">
-  <soap:Body>
-  </soap:Body>
-</soap:Envelope>
-';
+    it('throw exception when missing namespace', function () {
+        $response = '<soap:Envelope xmlns="http://schemas.xmlsoap.org/soap/envelope/"></soap:Envelope>';
 
-    expect(fn () => SoapXml::parse($response))
-        ->toThrow(
-            exception: RuntimeException::class,
-            exceptionMessage: 'SOAP namespace prefix not found.',
-        );
+        expect(fn () => SoapXml::parse($response))
+            ->toThrow(
+                exception: RuntimeException::class,
+                exceptionMessage: 'SOAP namespace prefix not found.',
+            );
+    });
+
+    it('throw exception when missing Envelope element', function () {
+        $response = '<soap:e xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"></soap:e>';
+
+        expect(fn () => SoapXml::parse($response))
+            ->toThrow(
+                exception: RuntimeException::class,
+                exceptionMessage: 'Missing mandatory "Envelope" element.',
+            );
+    });
 });

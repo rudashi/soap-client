@@ -22,6 +22,9 @@
             "Tests\\": "tests/"
         }
     },
+    "replace": {
+        "symfony/polyfill-php80": "*"
+    },
     "scripts": {
         "test:unit": "pest --testsuite=unit",
         "test:mutate": "pest --mutate",

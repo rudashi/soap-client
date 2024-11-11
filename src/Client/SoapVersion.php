@@ -15,7 +15,7 @@ enum SoapVersion
     public static function determine(string $string): self
     {
         foreach (self::cases() as $case) {
-            if (stripos($string, $case->schema()) !== false) {
+            if (str_contains($string, $case->schema())) {
                 return $case;
             }
         }

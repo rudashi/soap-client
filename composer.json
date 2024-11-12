@@ -29,7 +29,7 @@
         "test:unit": "pest --testsuite=unit",
         "test:mutate": "pest --mutate",
         "test:coverage": "pest --coverage",
-        "test:pint": "php-cs-fixer check --allow-risky=yes -vvv",
+        "test:pint": "php-cs-fixer check --allow-risky=yes --config=.php-cs-fixer.php --diff -vvv",
         "test": [
             "@test:pint",
             "@test:unit",
